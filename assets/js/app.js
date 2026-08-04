@@ -1,3 +1,5 @@
+console.log("========== APP STARTING ==========");
+
 // =============================
 // DOM ELEMENTS
 // =============================
@@ -21,21 +23,29 @@ const lotSizeDisplay = document.getElementById("lotSize");
 const slPipsDisplay = document.getElementById("slPips");
 const rrDisplay = document.getElementById("rr");
 
+console.log("Button:", calculateBtn);
+console.log("Instrument Select:", instrumentSelect);
+console.log("Instruments Object:", instruments);
+
 
 // =============================
 // LOAD INSTRUMENTS
 // =============================
 
-function loadInstruments(){
+function loadInstruments() {
 
-    instrumentSelect.innerHTML="";
+    console.log("Loading instruments...");
 
-    for(const key in instruments){
+    instrumentSelect.innerHTML = "";
 
-        const option=document.createElement("option");
+    for (const key in instruments) {
 
-        option.value=key;
-        option.textContent=instruments[key].name;
+        console.log("Adding:", key);
+
+        const option = document.createElement("option");
+
+        option.value = key;
+        option.textContent = instruments[key].name;
 
         instrumentSelect.appendChild(option);
 
@@ -50,11 +60,16 @@ loadInstruments();
 // EVENTS
 // =============================
 
-calculateBtn.addEventListener("click", calculateTrade);
+calculateBtn.addEventListener("click", () => {
+
+    console.log("Calculate Button Clicked!");
+
+    calculateTrade();
+
+});
 
 balanceInput.addEventListener("input", calculateTrade);
 riskInput.addEventListener("input", calculateTrade);
-
 entryInput.addEventListener("input", calculateTrade);
 stopLossInput.addEventListener("input", calculateTrade);
 takeProfitInput.addEventListener("input", calculateTrade);
@@ -67,17 +82,19 @@ tradeType.addEventListener("change", calculateTrade);
 // MESSAGE
 // =============================
 
-function showError(text){
+function showError(text) {
+
+    console.log("ERROR:", text);
 
     message.classList.remove("d-none");
-    message.textContent=text;
+    message.textContent = text;
 
 }
 
-function clearError(){
+function clearError() {
 
     message.classList.add("d-none");
-    message.textContent="";
+    message.textContent = "";
 
 }
 
@@ -86,66 +103,79 @@ function clearError(){
 // CALCULATOR
 // =============================
 
-function calculateTrade(){
+function calculateTrade() {
+
+    console.log("calculateTrade() called");
 
     clearError();
 
-    const balance=parseFloat(balanceInput.value);
-    const riskPercent=parseFloat(riskInput.value);
+    const balance = parseFloat(balanceInput.value);
+    const riskPercent = parseFloat(riskInput.value);
+    const entry = parseFloat(entryInput.value);
+    const stopLoss = parseFloat(stopLossInput.value);
+    const takeProfit = parseFloat(takeProfitInput.value);
 
-    const entry=parseFloat(entryInput.value);
-    const stopLoss=parseFloat(stopLossInput.value);
-    const takeProfit=parseFloat(takeProfitInput.value);
+    console.log({
+        balance,
+        riskPercent,
+        entry,
+        stopLoss,
+        takeProfit
+    });
 
-    if(
-
+    if (
         isNaN(balance) ||
-
         isNaN(riskPercent) ||
-
         isNaN(entry) ||
-
         isNaN(stopLoss) ||
-
         isNaN(takeProfit)
+    ) {
 
-    ){
+        console.log("Missing input...");
 
-        riskAmountDisplay.textContent="$0.00";
-        lotSizeDisplay.textContent="0.00";
-        slPipsDisplay.textContent="0 pips";
-        rrDisplay.textContent="0 : 0";
+        riskAmountDisplay.textContent = "$0.00";
+        lotSizeDisplay.textContent = "0.00";
+        slPipsDisplay.textContent = "0 pips";
+        rrDisplay.textContent = "0 : 0";
 
         return;
-
     }
 
-    const instrument=instruments[instrumentSelect.value];
+    const instrument = instruments[instrumentSelect.value];
 
-    const riskAmount=balance*(riskPercent/100);
+    console.log("Selected Instrument:", instrument);
 
-    const stopDistance=Math.abs(entry-stopLoss);
+    const riskAmount = balance * (riskPercent / 100);
 
-    const takeProfitDistance=Math.abs(takeProfit-entry);
+    const stopDistance = Math.abs(entry - stopLoss);
 
-    const slPips=stopDistance/instrument.pipSize;
+    const takeProfitDistance = Math.abs(takeProfit - entry);
 
-    const tpPips=takeProfitDistance/instrument.pipSize;
+    const slPips = stopDistance / instrument.pipSize;
 
-    const rr=tpPips/slPips;
+    const tpPips = takeProfitDistance / instrument.pipSize;
 
-    const lotSize=
+    const rr = tpPips / slPips;
 
-        riskAmount/
+    const lotSize =
+        riskAmount /
+        (stopDistance * instrument.contractSize);
 
-        (stopDistance*instrument.contractSize);
+    console.log({
+        riskAmount,
+        stopDistance,
+        slPips,
+        tpPips,
+        rr,
+        lotSize
+    });
 
-    riskAmountDisplay.textContent="$"+riskAmount.toFixed(2);
+    riskAmountDisplay.textContent = "$" + riskAmount.toFixed(2);
+    lotSizeDisplay.textContent = lotSize.toFixed(2) + " Lots";
+    slPipsDisplay.textContent = slPips.toFixed(1) + " pips";
+    rrDisplay.textContent = "1 : " + rr.toFixed(2);
 
-    lotSizeDisplay.textContent=lotSize.toFixed(2)+" Lots";
-
-    slPipsDisplay.textContent=slPips.toFixed(1)+" pips";
-
-    rrDisplay.textContent="1 : "+rr.toFixed(2);
-
+    console.log("Calculation Complete");
 }
+
+console.log("========== APP READY ==========");
