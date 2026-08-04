@@ -8,7 +8,11 @@ Built with **HTML**, **CSS**, **JavaScript**, and **Bootstrap 5**.
 
 ## 🌐 Live Demo
 
-> Coming Soon (GitHub Pages)
+🚀 **Live Application**
+
+👉 https://theelitecode.github.io/lot-size-calculator/
+
+No installation required. Open the link in any modern browser and start calculating position sizes instantly.
 
 ---
 
