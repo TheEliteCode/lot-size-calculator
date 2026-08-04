@@ -18,7 +18,7 @@ No installation required. Open the link in any modern browser and start calculat
 
 ## 📸 Preview
 
-> Add a screenshot of the application here after deployment.
+
 
 ![PositionSizer Screenshot](screenshot.png)
 
