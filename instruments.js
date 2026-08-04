@@ -1,4 +1,5 @@
 const instruments = {
+
     EURUSD: {
         name: "EUR/USD",
         contractSize: 100000,
@@ -40,4 +41,5 @@ const instruments = {
         contractSize: 100000,
         pipSize: 0.01
     }
+
 };

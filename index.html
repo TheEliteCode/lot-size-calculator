@@ -1,209 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lot Size Calculator</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body class="bg-light">
 
-<div class="container py-5">
+    <div class="container py-5">
 
-    <div class="row justify-content-center">
+        <div class="row justify-content-center">
 
-        <div class="col-lg-7">
+            <div class="col-lg-8">
 
-            <div class="card shadow border-0">
+                <div class="card shadow">
 
-                <div class="card-body p-4">
+                    <div class="card-body p-4">
 
-                    <h2 class="text-center fw-bold">
-                        Lot Size Calculator
-                    </h2>
+                        <h2 class="text-center mb-1">
+                            Lot Size Calculator
+                        </h2>
 
-                    <p class="text-center text-muted mb-4">
-                        Professional Risk Management Tool
-                    </p>
+                        <p class="text-center text-muted mb-4">
+                            Forex Risk Management Tool
+                        </p>
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Account Balance ($)</label>
-                            <input
-                                type="number"
-                                class="form-control"
-                                id="balance"
-                                placeholder="5000">
-                        </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Account Balance ($)
+                                </label>
 
-                        <div class="col-md-6 mb-3">
-                            <label class="form-label">Risk (%)</label>
-                            <input
-                                type="number"
-                                class="form-control"
-                                id="risk"
-                                placeholder="1">
-                        </div>
+                                <input
+                                    type="number"
+                                    id="balance"
+                                    class="form-control"
+                                    placeholder="5000">
+                            </div>
 
-                    </div>
+                            <div class="col-md-6 mb-3">
+                                <label class="form-label">
+                                    Risk (%)
+                                </label>
 
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Instrument
-                        </label>
-
-                        <select
-                            id="instrument"
-                            class="form-select">
-
-                        </select>
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Trade Type
-                        </label>
-
-                        <select
-                            id="tradeType"
-                            class="form-select">
-
-                            <option value="BUY">Buy</option>
-                            <option value="SELL">Sell</option>
-
-                        </select>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-                                Entry Price
-                            </label>
-
-                            <input
-                                type="number"
-                                id="entry"
-                                step="0.00001"
-                                class="form-control">
-
-                        </div>
-
-                        <div class="col-md-6 mb-3">
-
-                            <label class="form-label">
-                                Stop Loss
-                            </label>
-
-                            <input
-                                type="number"
-                                id="stopLoss"
-                                step="0.00001"
-                                class="form-control">
-
-                        </div>
-
-                    </div>
-
-                    <div class="mb-3">
-
-                        <label class="form-label">
-                            Take Profit
-                        </label>
-
-                        <input
-                            type="number"
-                            id="takeProfit"
-                            step="0.00001"
-                            class="form-control">
-
-                    </div>
-
-                    <div
-                        id="message"
-                        class="alert alert-danger d-none">
-                    </div>
-
-                    <button
-                        id="calculateBtn"
-                        class="btn btn-primary w-100 btn-lg">
-
-                        Calculate Trade
-
-                    </button>
-
-                    <hr>
-
-                    <div class="row text-center g-3">
-
-                        <div class="col-6">
-
-                            <div class="border rounded p-3">
-
-                                <small class="text-muted">
-                                    Risk Amount
-                                </small>
-
-                                <h4 id="riskAmount">
-                                    $0.00
-                                </h4>
-
+                                <input
+                                    type="number"
+                                    id="risk"
+                                    class="form-control"
+                                    placeholder="1">
                             </div>
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="mb-3">
 
-                            <div class="border rounded p-3">
+                            <label class="form-label">
+                                Instrument
+                            </label>
 
-                                <small class="text-muted">
-                                    Lot Size
-                                </small>
-
-                                <h4 id="lotSize">
-                                    0.00
-                                </h4>
-
-                            </div>
+                            <select
+                                id="instrument"
+                                class="form-select">
+                            </select>
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="row">
 
-                            <div class="border rounded p-3">
+                            <div class="col-md-6 mb-3">
 
-                                <small class="text-muted">
+                                <label class="form-label">
+                                    Entry Price
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="entry"
+                                    step="0.00001"
+                                    class="form-control">
+
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+
+                                <label class="form-label">
                                     Stop Loss
-                                </small>
+                                </label>
 
-                                <h4 id="slPips">
-                                    0 pips
-                                </h4>
+                                <input
+                                    type="number"
+                                    id="stopLoss"
+                                    step="0.00001"
+                                    class="form-control">
 
                             </div>
 
                         </div>
 
-                        <div class="col-6">
+                        <div class="mb-4">
 
-                            <div class="border rounded p-3">
+                            <label class="form-label">
+                                Take Profit
+                            </label>
 
-                                <small class="text-muted">
-                                    Risk : Reward
-                                </small>
+                            <input
+                                type="number"
+                                id="takeProfit"
+                                step="0.00001"
+                                class="form-control">
 
-                                <h4 id="rr">
-                                    0 : 0
-                                </h4>
+                        </div>
+
+                        
+
+                        <hr class="my-4">
+
+                        <div class="row g-3">
+
+                            <div class="col-md-6">
+
+                                <div class="result-card">
+
+                                    <h6>Risk Amount</h6>
+
+                                    <h3 id="riskAmount">
+                                        $0.00
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="result-card">
+
+                                    <h6>Lot Size</h6>
+
+                                    <h3 id="lotSize">
+                                        0.00 Lots
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="result-card">
+
+                                    <h6>Stop Loss</h6>
+
+                                    <h3 id="slPips">
+                                        0 pips
+                                    </h3>
+
+                                </div>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                                <div class="result-card">
+
+                                    <h6>Risk : Reward</h6>
+
+                                    <h3 id="rr">
+                                        1 : 0
+                                    </h3>
+
+                                </div>
 
                             </div>
 
@@ -219,10 +191,9 @@
 
     </div>
 
-</div>
-
-<script src="assets/js/instruments.js"></script>
-<script src="assets/js/app.js"></script>
+    <script src="instruments.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
